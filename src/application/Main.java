@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+
         Locale.setDefault(Locale.US);
         try(Scanner sc = new Scanner(System.in)) {
 
@@ -24,13 +25,15 @@ public class Main {
             System.out.print("Wanna make a initial deposit? (1 - Yes / 2 - Skip): ");
             int option = sc.nextInt();
 
-            double initialDeposit = 0;
+            Bank account;
             if (option == 1) {
                 System.out.print("Enter initial deposit: ");
-                initialDeposit = sc.nextDouble();
+                double initialDeposit = sc.nextDouble();
+                account = new Bank(number, holder, initialDeposit);
+            } else {
+                account = new Bank(number, holder);
             }
 
-            Bank account = new Bank(number, holder, initialDeposit);
             System.out.println();
             System.out.println("---Account data---\n" + account);
 
@@ -43,6 +46,7 @@ public class Main {
                 option = sc.nextInt();
                 sc.nextLine();
 
+                double value;
                 switch (option) {
                     case 0:
                         System.out.println("Thanks for using our bank!");
@@ -54,13 +58,13 @@ public class Main {
                         break;
                     case 2:
                         System.out.print("Enter how much to deposit: ");
-                        initialDeposit = sc.nextDouble();
-                        account.deposit(initialDeposit);
+                        value = sc.nextDouble();
+                        account.deposit(value);
                         break;
                     case 3:
                         System.out.print("Enter how much to withdrawn ($ 5.00 taxes): ");
-                        initialDeposit = sc.nextDouble();
-                        account.withdraw(initialDeposit);
+                        value = sc.nextDouble();
+                        account.withdraw(value);
                         break;
                     default:
                         System.out.println();
